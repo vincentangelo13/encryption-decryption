@@ -1,0 +1,15 @@
+---
+
+- name: Encrypt image file using Blowfish
+  hosts: localhost
+  gather_facts: false
+  vars:
+    image_to_encrypt: "/home/rouj/encryption-decryption/to_encrypt/"
+    encrypted_image: "/home/rouj/encryption-decryption/encrypted/"
+    blowfish_password: "admin123!"
+
+  tasks:
+    - name: Encrypt image using Blowfish
+      become: yes
+      shell: |
+        openssl enc -e -blowfish -a -salt -in "{{ image_to_encrypt }}" -out "{{ encrypted_image }}" -pass pass:"{{ blowfish_password }}"
